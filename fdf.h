@@ -18,12 +18,12 @@ typedef	struct s_ptr
 
 typedef	struct s_line
 {
-	float	start_x;
-	float	start_y;
-	float	start_z;
-	float	end_x;
-	float	end_y;
-	float	end_z;
+	int	start_x;
+	int	start_y;
+	int	start_z;
+	int	end_x;
+	int	end_y;
+	int	end_z;
 }				t_line;
 
 typedef	struct t_cam
@@ -37,5 +37,7 @@ typedef	struct t_cam
 }				t_cam;
 
 void	ft_read_map(t_map *map);
+void	ft_init_line(t_line *line);
+void	ft_init(t_map *map, t_cam *cam);
 
 #endif

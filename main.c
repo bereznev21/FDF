@@ -6,7 +6,7 @@
 /*   By: rpoetess <rpoetess@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 17:10:41 by rpoetess          #+#    #+#             */
-/*   Updated: 2019/11/10 21:05:26 by rpoetess         ###   ########.fr       */
+/*   Updated: 2019/11/10 22:13:57 by rpoetess         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_print_sin (void *mlx_ptr, void *win_ptr)
 		i += 0.01;
 	}
 }
-
+/*
 void	ft_print_line(void *mlx_ptr, void *win_ptr)
 {
 	float	x;
@@ -54,7 +54,7 @@ void	ft_print_line(void *mlx_ptr, void *win_ptr)
 		x += 0.05;
 	}
 }
-
+*/
 void	ft_print_map(int **map, void *mlx_ptr, void *win_ptr)
 {
 	int	i;
@@ -136,20 +136,46 @@ void	ft_print_gorizontal_line(void *mlx_ptr, void *win_ptr, float i, float j, t_
 	}
 }
 
+void	ft_print_line(void *mlx_ptr, void *win_ptr, t_cam *cam, t_line line_t)
+{
+	(void)mlx_ptr;
+	(void)win_ptr;
+	(void)line_t;
+	(void)cam;
+	float	new_x;
+	float	new_y;
+	float	new_z;
+	
+	new_x = line_t.start_x;
+	new_y = line_t.start_y;
+	while (new_y != line_t.end_z)
+	{
+		new_y = 
+	}
+}
+
 void	ft_print_grid(t_map *map, void *mlx_ptr, void *win_ptr, t_cam *cam)
 {
-	int	i;
-	int	j;
+	t_line	line_t;
 
-	i = -1;
-	while (++i < map->hight)
+	ft_init_line(&line_t);
+	while (++line_t.start_y < map->hight - 1)
 	{
-		j = -1;
-		while (++j < map->width)
+		line_t.start_x = -1;
+		while (++line_t.start_x < map->width - 1)
 		{
 			//printf("%d %d\n", i, j);
-			ft_print_vertical_line(mlx_ptr, win_ptr, i, j, cam);
-			ft_print_gorizontal_line(mlx_ptr, win_ptr, i, j, cam);		
+			//ft_print_vertical_line(mlx_ptr, win_ptr, i, j, cam);
+			//ft_print_gorizontal_line(mlx_ptr, win_ptr, line_t.start_y, line_t.start_x, cam);
+			line_t.start_z = map->map[line_t.start_y][line_t.start_x];
+			line_t.end_x = line_t.start_x + 1;
+			line_t.end_y = line_t.start_y;
+			line_t.end_z = map->map[line_t.end_y][line_t.end_x];
+			ft_print_line(mlx_ptr, win_ptr, cam, line_t);
+			line_t.end_x = line_t.start_x;
+			line_t.end_y = line_t.start_y + 1;
+			line_t.end_z = map->map[line_t.end_y][line_t.end_x];
+			ft_print_line(mlx_ptr, win_ptr, cam, line_t);
 		}
 	}
 	/*
@@ -164,22 +190,6 @@ void	ft_print_grid(t_map *map, void *mlx_ptr, void *win_ptr, t_cam *cam)
 		i++;
 	}
 	*/
-}
-
-void	ft_init(t_map *map, t_cam *cam)
-{
-	map = (t_map *)malloc(sizeof(t_map));
-	map->map = NULL;
-	map->hight = 0;
-	map->width = 0;
-	cam->top = 150;
-	cam->left = 100;
-	//cam->alph = 0;
-	cam->alph = 50;
-	//cam->alph = 140;
-	cam->beta = 0;
-	cam->gam = 0;
-	cam->zoom = 20;
 }
 
 int		main()

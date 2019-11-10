@@ -22,7 +22,7 @@ void	ft_crt_map(t_map *map)
 //	map->x_map = (int**)malloc(sizeof(int*) * map->hight);
 //	map->y_map = (int**)malloc(sizeof(int*) * map->hight);
 //	map->z_map = (int**)malloc(sizeof(int*) * map->hight);
-	while (++i < map->width)
+	while (++i < map->hight)
 	{
 		map->map[i] = (int*)malloc(sizeof(int) * map->width);
 //		map->x_map[i] = (int*)malloc(sizeof(int) * map->width);

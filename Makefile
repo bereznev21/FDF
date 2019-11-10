@@ -5,6 +5,7 @@ OPTIONS = -I. -Ilibft/includes
 
 SRC = main.c \
 		read_map.c \
+		init.c \
 
 FLS = -g -Wall -Wextra -Werror
 
